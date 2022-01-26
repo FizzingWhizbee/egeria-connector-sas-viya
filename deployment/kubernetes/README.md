@@ -13,22 +13,16 @@ If your deployment uses the truststores-only mode, comment out the following lin
 # - tls-transformer.yaml
 ```
    
-3. Create a new file in the `egeria-connector` directory named `kustomization.yaml` with the contents:
-```yaml
-resources:
-  - deployment.yaml
-```
-
-4. Navigate back to the Kubernetes install root directory, and add the following line to `kustomization.yaml` under the `resources` section
+3. Navigate back to the Kubernetes install root directory, and add the following line to `kustomization.yaml` under the `resources` section
 ```yaml
   - sas-bases/overlays/egeria-connector
 ```
 
-5. From the install directory, run the command `kustomize build > /tmp/deployment`
+4. From the install directory, run the command `kustomize build > /tmp/deployment`
 
-6. Ensure your KUBECONFIG is set correctly with admin privileges and then apply the new changes with `kubectl apply -f /tmp/deployment`
+5. Ensure your KUBECONFIG is set correctly with admin privileges and then apply the new changes with `kubectl apply -f /tmp/deployment`
 
-7. Run `configure.sh` to configure the connector to connect to your Catalog service.  The script may be run in interactive mode to prompt for the necessary values or the values may be specified on the command line.  
+6. Run `configure.sh` to configure the connector to connect to your Catalog service.  The script may be run in interactive mode to prompt for the necessary values or the values may be specified on the command line.  
    1. If you wish to have the SAS connector join a remote Egeria cohort then specify the optional values for the remote Egeria server's Kafka hostname, Kafka port and cohort name.
    2. NOTE: The configure.sh script need only be run once.  The connector will persist the configuration values and reuse them upon startup.
    3. Usage:
@@ -37,6 +31,6 @@ resources:
       `             [<Kafka hostname> <Kafka port> <cohort name>`
     * For example: `configure.sh https://myviyacluster.companyname.com garygeeke sasuser saspassword`
 
-9. For reference, the repository connector starts a local Egeria server named, `SASRepositoryProxy`
+7. For reference, the repository connector starts a local Egeria server named, `SASRepositoryProxy`
 
 
